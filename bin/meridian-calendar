@@ -1,0 +1,48 @@
+#!/usr/bin/python3
+"""Launcher for Meridian. Works from a source checkout or an installed package."""
+import os
+import sys
+
+HERE = os.path.dirname(os.path.realpath(__file__))
+for candidate in (os.path.join(HERE, ".."), "/usr/share/meridian-calendar"):
+    if os.path.isdir(os.path.join(candidate, "meridian")):
+        sys.path.insert(0, os.path.abspath(candidate))
+        break
+
+
+def _userns_blocked():
+    """True when Ubuntu's AppArmor rules will stop WebKit from sandboxing itself."""
+    try:
+        with open("/proc/sys/kernel/apparmor_restrict_unprivileged_userns") as fh:
+            if fh.read().strip() != "1":
+                return False
+    except OSError:
+        return False
+    for attr in ("/proc/self/attr/apparmor/current", "/proc/self/attr/current"):
+        try:
+            with open(attr) as fh:
+                return fh.read().strip().startswith("unconfined")
+        except OSError:
+            continue
+    return True
+
+
+if _userns_blocked() and not os.environ.get("WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS"):
+    installed = os.path.realpath(__file__) == "/usr/bin/meridian-calendar"
+    fix = ("sudo apparmor_parser -r /etc/apparmor.d/meridian-calendar" if installed
+           else f"make -C {os.path.abspath(os.path.join(HERE, '..'))} apparmor")
+    if os.environ.get("MERIDIAN_REQUIRE_SANDBOX"):
+        sys.stderr.write(
+            "meridian: Ubuntu's AppArmor is blocking WebKit's sandbox.\n"
+            f"meridian: install Meridian's AppArmor profile, then try again:\n    {fix}\n")
+        sys.exit(1)
+    # Meridian only ever shows its own local files, with all network access
+    # blocked, so running WebKit unsandboxed is low-risk, but the profile is better.
+    sys.stderr.write(
+        "meridian: AppArmor blocks WebKit's sandbox for this launcher, so starting without it.\n"
+        f"meridian: to restore the sandbox, run once:\n    {fix}\n")
+    os.environ["WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS"] = "1"
+
+from meridian.application import main  # noqa: E402
+
+sys.exit(main(sys.argv))

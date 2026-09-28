@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.meridiancal.Meridian</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>Meridian</name>
+  <summary>A calm, private calendar for your day</summary>
+  <description>
+    <p>Meridian is a fast, beautiful calendar that keeps your schedule on your own computer.
+    There are no accounts, no tracking and no network access.</p>
+    <ul>
+      <li>Day, week, month and agenda views</li>
+      <li>Drag to create, move and resize events</li>
+      <li>Repeating events with “only this one” or “all future” edits</li>
+      <li>Desktop reminders, even when the window is closed</li>
+      <li>Colour-coded calendars, fast search and undo</li>
+      <li>Import and export standard .ics files</li>
+    </ul>
+  </description>
+  <developer id="io.github.meridiancal"><name>The Meridian contributors</name></developer>
+  <launchable type="desktop-id">io.github.meridiancal.Meridian.desktop</launchable>
+  <provides><binary>meridian-calendar</binary></provides>
+  <categories><category>Office</category><category>Calendar</category></categories>
+  <content_rating type="oars-1.1"/>
+  <supports><control>pointing</control><control>keyboard</control></supports>
+  <requires><display_length compare="ge">380</display_length></requires>
+  <releases>
+    <release version="1.0.2" date="2026-09-28">
+      <description><p>Fixes a freeze when clicking an event’s start or end time. The header adapts to narrower windows.</p></description>
+    </release>
+    <release version="1.0.1" date="2026-09-28">
+      <description><p>Works on Ubuntu 24.04 without sudo (AppArmor profile for the WebKit sandbox). Click anywhere in the calendar to create an event.</p></description>
+    </release>
+    <release version="1.0.0" date="2026-09-28">
+      <description><p>First release.</p></description>
+    </release>
+  </releases>
+</component>

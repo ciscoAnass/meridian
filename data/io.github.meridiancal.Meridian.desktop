@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=Application
+Name=Meridian
+GenericName=Calendar
+Comment=A calm, private calendar for your day
+Exec=meridian-calendar
+Icon=io.github.meridiancal.Meridian
+Terminal=false
+Categories=Office;Calendar;GTK;GNOME;
+Keywords=calendar;agenda;schedule;events;reminders;planner;appointments;meetings;
+StartupNotify=true
+StartupWMClass=io.github.meridiancal.Meridian
+X-GNOME-UsesNotifications=true
+Actions=new-event;
+
+[Desktop Action new-event]
+Name=New Event
+Exec=meridian-calendar --new-event

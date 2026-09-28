@@ -1,0 +1,40 @@
+.TH MERIDIAN-CALENDAR 1 "September 2026" "Meridian 1.0.2" "User Commands"
+.SH NAME
+meridian-calendar \- a calm, private calendar for the desktop
+.SH SYNOPSIS
+.B meridian-calendar
+[\fIOPTION\fR]
+.SH DESCRIPTION
+Meridian is a calendar with day, week, month and agenda views, repeating
+events, reminders and colour-coded calendars. All data stays on this
+computer; Meridian never connects to the network.
+.SH OPTIONS
+.TP
+.BR \-n ", " \-\-new\-event
+Open Meridian ready to add a new event. If Meridian is already running,
+the request is sent to the running instance.
+.TP
+.BR \-b ", " \-\-background
+Start without opening a window. Reminders are still delivered.
+.TP
+.B \-\-debug
+Enable the web inspector and print page console messages.
+.TP
+.BR \-v ", " \-\-version
+Print the version and exit.
+.SH FILES
+.TP
+.I ~/.local/share/meridian/calendar.json
+Calendars and events.
+.TP
+.I ~/.local/share/meridian/backups/
+Rolling daily backups (the last seven days).
+.TP
+.I ~/.config/meridian/settings.json
+Preferences.
+.SH ENVIRONMENT
+.TP
+.B MERIDIAN_DATA_DIR
+Use this folder for data and settings instead of the defaults.
+.SH SEE ALSO
+Press Ctrl+? inside Meridian for keyboard shortcuts.

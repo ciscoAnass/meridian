@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<!-- No network, ever: every resource must come from the app's own files. -->
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self' file:; style-src 'self' file: 'unsafe-inline'; font-src 'self' file:; img-src 'self' file: data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meridian</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="booting">
+<div id="app" class="app">
+  <aside id="sidebar" class="sidebar" aria-label="Calendars">
+    <div class="sidebar-inner">
+      <div id="mini" class="mini" role="grid" aria-label="Month overview"></div>
+      <section class="cals">
+        <div class="cals-head">
+          <h2>Calendars</h2>
+          <button id="add-cal" class="icon-btn" type="button" aria-label="New calendar" title="New calendar">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg>
+          </button>
+        </div>
+        <ul id="cal-list" class="cal-list"></ul>
+      </section>
+      <section id="upnext" class="upnext" aria-label="Up next"></section>
+    </div>
+  </aside>
+  <main id="main" class="main">
+    <header class="main-head">
+      <h1 id="title" class="title" aria-live="polite"></h1>
+      <p id="subtitle" class="subtitle"></p>
+    </header>
+    <div id="view" class="view"></div>
+  </main>
+  <aside id="search-panel" class="search-panel" aria-label="Search results" hidden></aside>
+</div>
+<div id="layer" class="layer"></div>
+<div id="toasts" class="toasts" role="status" aria-live="polite"></div>
+
+<script src="js/core.js"></script>
+<script src="js/recurrence.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ics.js"></script>
+<script src="js/views.js"></script>
+<script src="js/interact.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
